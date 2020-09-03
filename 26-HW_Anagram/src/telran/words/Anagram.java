@@ -14,23 +14,33 @@ public class Anagram {
 
 		HashMap<String, Integer> mapWord = getMap(charsWord);
 		
+
 		//====================================//
-		for (Map.Entry entry : mapWord.entrySet()) {
-			System.out.println(entry);
-		}
-		System.out.println();
+		
+		printMap(mapWord);
+
 		//====================================//
 		
 //		for(char c : charsAnagram) {
 //			String key = "" + c;
-//			
+//			mapWord.compute(key, (k,v) ->(v == 0)?mapWord.remove(k) : --v );
 //			
 //		}
 		
 		
-		
-
 		return true;
+	}
+
+	/**
+	 * 
+	 * @param mapWord
+	 */
+	private static void printMap(HashMap<String, Integer> mapWord) {
+		for (Map.Entry entry : mapWord.entrySet()) {
+			System.out.println(entry);
+		}
+		System.out.println();
+		
 	}
 
 	/**
@@ -40,6 +50,7 @@ public class Anagram {
 	 */
 	private static HashMap<String, Integer> getMap(char[] charsWord) {
 		HashMap<String, Integer> res = new HashMap<>();
+		
 		for (char c : charsWord) {
 			String key = "" + c;
 			res.compute(key, (k ,v) -> (v == null) ? 1 : ++v);
