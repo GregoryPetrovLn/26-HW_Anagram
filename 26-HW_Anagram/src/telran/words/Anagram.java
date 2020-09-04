@@ -3,8 +3,12 @@ package telran.words;
 import java.util.*;
 
 public class Anagram {
-
-	// create only one map with appaying methods merge and compute
+	/**
+	 * 
+	 * @param word
+	 * @param anagram
+	 * @return
+	 */
 	public static boolean isAnagram(String word, String anagram) {
 		if (!checker(word, anagram))
 			return false;
@@ -13,34 +17,17 @@ public class Anagram {
 		char charsAnagram[] = anagram.toLowerCase().toCharArray();
 
 		HashMap<String, Integer> mapWord = getMap(charsWord);
-		
 
-		//====================================//
-		
-		printMap(mapWord);
+		for (char c : charsAnagram) {
+			String key = "" + c;
 
-		//====================================//
-		
-//		for(char c : charsAnagram) {
-//			String key = "" + c;
-//			mapWord.compute(key, (k,v) ->(v == 0)?mapWord.remove(k) : --v );
-//			
-//		}
-		
-		
-		return true;
-	}
-
-	/**
-	 * 
-	 * @param mapWord
-	 */
-	private static void printMap(HashMap<String, Integer> mapWord) {
-		for (Map.Entry entry : mapWord.entrySet()) {
-			System.out.println(entry);
+			int res = mapWord.merge(key, -1, (v1, v2) -> v1 + v2);
+			if (res == -1) {
+				return false;
+			}
 		}
-		System.out.println();
-		
+
+		return true;
 	}
 
 	/**
@@ -50,10 +37,10 @@ public class Anagram {
 	 */
 	private static HashMap<String, Integer> getMap(char[] charsWord) {
 		HashMap<String, Integer> res = new HashMap<>();
-		
+
 		for (char c : charsWord) {
 			String key = "" + c;
-			res.compute(key, (k ,v) -> (v == null) ? 1 : ++v);
+			res.compute(key, (k, v) -> (v == null) ? 1 : ++v);
 		}
 
 		return res;
