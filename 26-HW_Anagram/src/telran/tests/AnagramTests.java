@@ -17,6 +17,7 @@ class AnagramTests {
 	
 	@Test
 	void testAnagramFalse() {
+		assertFalse(isAnagram(word, "abcdef"));
 		assertFalse(isAnagram(word, "123"));
 		assertFalse(isAnagram("a", "a"));
 		assertFalse(isAnagram(word, "AbCd;"));

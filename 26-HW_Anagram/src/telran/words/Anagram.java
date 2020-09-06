@@ -10,7 +10,7 @@ public class Anagram {
 	 * @return
 	 */
 	public static boolean isAnagram(String word, String anagram) {
-		if (!checker(word, anagram))
+		if (!isWalid(word, anagram))
 			return false;
 
 		char charsWord[] = word.toLowerCase().toCharArray();
@@ -22,6 +22,7 @@ public class Anagram {
 			String key = "" + c;
 
 			int res = mapWord.merge(key, -1, (v1, v2) -> v1 + v2);
+			
 			if (res == -1) {
 				return false;
 			}
@@ -29,6 +30,7 @@ public class Anagram {
 
 		return true;
 	}
+	
 
 	/**
 	 * 
@@ -52,8 +54,8 @@ public class Anagram {
 	 * @param anagram
 	 * @return
 	 */
-	private static boolean checker(String word, String anagram) {
-		String regex = "[a-zA-Z]+{2}";
+	private static boolean isWalid(String word, String anagram) {
+		String regex = "[a-zA-Z]+";
 
 		if (!word.matches(regex) || !anagram.matches(regex))
 			return false;
@@ -62,6 +64,9 @@ public class Anagram {
 			return false;
 
 		if (word.length() != anagram.length())
+			return false;
+		
+		if (word.length() < 3)
 			return false;
 
 		return true;
