@@ -20,15 +20,17 @@ public class Anagram {
 
 		for (char c : charsAnagram) {
 			String key = "" + c;
+//
+//			if(mapWord.merge(key, -1, (v1, v2) -> v1 + v2) < 0)
+//				return false;
 
-			if(mapWord.merge(key, -1, (v1, v2) -> v1 + v2) < 0)
+			if (mapWord.compute(key, (k, v) -> v == null ? -1 : v - 1) < 0)
 				return false;
-			
+
 		}
 
 		return true;
 	}
-	
 
 	/**
 	 * 
@@ -40,7 +42,8 @@ public class Anagram {
 
 		for (char c : charsWord) {
 			String key = "" + c;
-			res.compute(key, (k, v) -> (v == null) ? 1 : ++v);
+			// res.compute(key, (k, v) -> (v == null) ? 1 : ++v);
+			res.merge(key, 1, (a, b) -> a + b);
 		}
 
 		return res;
@@ -63,7 +66,7 @@ public class Anagram {
 
 		if (word.length() != anagram.length())
 			return false;
-		
+
 		if (word.length() < 2)
 			return false;
 
