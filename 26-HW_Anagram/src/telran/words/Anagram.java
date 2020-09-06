@@ -21,11 +21,9 @@ public class Anagram {
 		for (char c : charsAnagram) {
 			String key = "" + c;
 
-			int res = mapWord.merge(key, -1, (v1, v2) -> v1 + v2);
-			
-			if (res == -1) {
+			if(mapWord.merge(key, -1, (v1, v2) -> v1 + v2) < 0)
 				return false;
-			}
+			
 		}
 
 		return true;
