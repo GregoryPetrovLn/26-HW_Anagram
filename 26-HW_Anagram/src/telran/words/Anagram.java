@@ -45,7 +45,6 @@ public class Anagram {
 			res.compute(key, (k, v) -> (v == null) ? 1 : ++v);
 		}
 
-		
 		return res;
 	}
 
