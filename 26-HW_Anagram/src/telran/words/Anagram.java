@@ -67,7 +67,7 @@ public class Anagram {
 		if (word.length() != anagram.length())
 			return false;
 		
-		if (word.length() < 3)
+		if (word.length() < 2)
 			return false;
 
 		return true;
